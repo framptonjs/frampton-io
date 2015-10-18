@@ -1,7 +1,6 @@
 import isObject from 'frampton-utils/is_object';
 import Request from 'frampton-io/http/request';
 import send from 'frampton-io/http/send';
-import queryString from 'frampton-io/http/query_string';
 
 /**
  * Perform an AJAX POST request and return an EventStream that reports the progress.
@@ -16,8 +15,10 @@ import queryString from 'frampton-io/http/query_string';
 export default function post(url, data) {
 
   if (isObject(data)) {
-    data = queryString(data);
+    data = JSON.stringify(data);
   }
 
-  return send(null, Request(url, 'POST', (data || null)));
+  return send(null, Request(url, 'POST', (data || null), {
+    'Content-Type' : 'application/json'
+  }));
 }

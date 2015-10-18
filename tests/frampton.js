@@ -922,7 +922,7 @@ define('frampton-data/union', ['exports', 'module', 'frampton-utils/assert', 'fr
   }
 
   function rawCase(type, cases, action, arg) {
-    (0, _assert)('wrong type passed to case', type !== action.of);
+    (0, _assert)('wrong type passed to case', type === action.of);
     var name = action.name in cases ? action.name : '_' in cases ? '_' : undefined;
     if (name === undefined) {
       throw new Error('unhandled value passed to case');
@@ -934,7 +934,14 @@ define('frampton-data/union', ['exports', 'module', 'frampton-utils/assert', 'fr
   var typeCase = (0, _curryN)(3, rawCase);
   var caseOn = (0, _curryN)(4, rawCase);
 
-  function Type(desc) {
+  /**
+   * @name Union
+   * @class
+   * @memberof Frampton.Data
+   * @param {Object} dex
+   * @returns {Object}
+   */
+  function Union(desc) {
     var obj = {};
     for (var key in desc) {
       obj[key] = Constructor(obj, key, desc[key]);
@@ -944,7 +951,7 @@ define('frampton-data/union', ['exports', 'module', 'frampton-utils/assert', 'fr
     return obj;
   }
 
-  module.exports = Type;
+  module.exports = Union;
 });
 define('frampton-data/when', ['exports', 'module', 'frampton-data/task'], function (exports, module, _framptonDataTask) {
   'use strict';
@@ -4336,7 +4343,7 @@ define('frampton-signals/event_stream', ['exports', 'frampton-utils/apply', 'fra
    *
    * @name recover
    * @method
-   * @memberof! EventStream.prototype
+   * @memberof EventStream.Signals.EventStream#
    * @param {Function} mapping A function to map an error to a value
    * @returns {Frampton.Signals.EventStream}
    */
@@ -5812,70 +5819,6 @@ define('frampton-style/supported_props', ['exports', 'module', 'frampton-style/s
     return obj;
   }
 });
-define('frampton-ui', ['exports', 'frampton/namespace', 'frampton-ui/input'], function (exports, _framptonNamespace, _framptonUiInput) {
-  'use strict';
-
-  function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
-
-  var _Frampton = _interopRequire(_framptonNamespace);
-
-  var _Input = _interopRequire(_framptonUiInput);
-
-  /**
-   * @name UI
-   * @namespace
-   * @memberof Frampton
-   */
-  _Frampton.UI = {};
-  _Frampton.UI.Input = _Input;
-});
-define('frampton-ui/input', ['exports', 'module', 'frampton-signals/stepper', 'frampton-events/event_value', 'frampton-events/listen', 'frampton-string/length'], function (exports, module, _framptonSignalsStepper, _framptonEventsEvent_value, _framptonEventsListen, _framptonStringLength) {
-  'use strict';
-
-  module.exports = ui_input;
-
-  function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
-
-  var _stepper = _interopRequire(_framptonSignalsStepper);
-
-  var _eventValue = _interopRequire(_framptonEventsEvent_value);
-
-  var _length = _interopRequire(_framptonStringLength);
-
-  function ui_input(element) {
-
-    var tagName = element.tagName.toLowerCase();
-    var localInputs = (0, _framptonEventsListen.listen)('input', element);
-    var localChanges = (0, _framptonEventsListen.listen)('change', element);
-    var localBlurs = (0, _framptonEventsListen.listen)('blur', element);
-    var localFocuses = (0, _framptonEventsListen.listen)('focus', element);
-    var focused = localBlurs.map(false).merge(localFocuses.map(true));
-    var values = localInputs.merge(localChanges).map(_eventValue);
-
-    var initialValue = (function () {
-      switch (tagName) {
-        case 'input':
-        case 'select':
-        case 'textarea':
-          return element.value;
-        default:
-          var temp = element.querySelector('input, select, textarea');
-          return temp && temp.value ? temp.value : '';
-      }
-    })();
-
-    return {
-      element: element,
-      change: localChanges,
-      input: localInputs,
-      blur: localBlurs,
-      focus: localFocuses,
-      isFocused: (0, _stepper)(false, focused),
-      value: (0, _stepper)(initialValue, values),
-      length: (0, _stepper)(initialValue.length, values.map(_length))
-    };
-  }
-});
 define('frampton-utils', ['exports', 'frampton/namespace', 'frampton-utils/apply', 'frampton-utils/assert', 'frampton-utils/compose', 'frampton-utils/curry', 'frampton-utils/equal', 'frampton-utils/extend', 'frampton-utils/get', 'frampton-utils/has_length', 'frampton-utils/identity', 'frampton-utils/immediate', 'frampton-utils/is_array', 'frampton-utils/is_boolean', 'frampton-utils/is_defined', 'frampton-utils/is_empty', 'frampton-utils/is_equal', 'frampton-utils/is_function', 'frampton-utils/is_nothing', 'frampton-utils/is_null', 'frampton-utils/is_object', 'frampton-utils/is_promise', 'frampton-utils/is_something', 'frampton-utils/is_string', 'frampton-utils/is_undefined', 'frampton-utils/log', 'frampton-utils/lazy', 'frampton-utils/memoize', 'frampton-utils/noop', 'frampton-utils/not', 'frampton-utils/of_value', 'frampton-utils/safe_get'], function (exports, _framptonNamespace, _framptonUtilsApply, _framptonUtilsAssert, _framptonUtilsCompose, _framptonUtilsCurry, _framptonUtilsEqual, _framptonUtilsExtend, _framptonUtilsGet, _framptonUtilsHas_length, _framptonUtilsIdentity, _framptonUtilsImmediate, _framptonUtilsIs_array, _framptonUtilsIs_boolean, _framptonUtilsIs_defined, _framptonUtilsIs_empty, _framptonUtilsIs_equal, _framptonUtilsIs_function, _framptonUtilsIs_nothing, _framptonUtilsIs_null, _framptonUtilsIs_object, _framptonUtilsIs_promise, _framptonUtilsIs_something, _framptonUtilsIs_string, _framptonUtilsIs_undefined, _framptonUtilsLog, _framptonUtilsLazy, _framptonUtilsMemoize, _framptonUtilsNoop, _framptonUtilsNot, _framptonUtilsOf_value, _framptonUtilsSafe_get) {
   'use strict';
 
@@ -6150,20 +6093,33 @@ define('frampton-utils/equal', ['exports', 'module', 'frampton-utils/is_object',
 
   function deep_equal(obj1, obj2) {
 
-    if (((0, _isObject)(obj1) || (0, _isArray)(obj1)) && ((0, _isObject)(obj1) || (0, _isArray)(obj1))) {
+    var depth = 0;
+    var original1 = obj1;
+    var original2 = obj2;
 
-      var key = null;
+    function _equal(obj1, obj2) {
 
-      for (key in obj1) {
-        if (!obj2 || !deep_equal(obj1[key], obj2[key])) {
-          return false;
+      depth++;
+
+      if (
+      // If we're dealing with a circular reference, return reference equality.
+      !(depth > 1 && original1 === obj1 && original2 === obj2) && ((0, _isObject)(obj1) || (0, _isArray)(obj1)) && ((0, _isObject)(obj2) || (0, _isArray)(obj2))) {
+
+        var key = null;
+
+        for (key in obj1) {
+          if (!obj2 || !_equal(obj1[key], obj2[key])) {
+            return false;
+          }
         }
-      }
 
-      return true;
-    } else {
-      return obj1 === obj2;
+        return true;
+      } else {
+        return obj1 === obj2;
+      }
     }
+
+    return _equal(obj1, obj2);
   }
 });
 define('frampton-utils/extend', ['exports', 'module', 'frampton-list/foldl'], function (exports, module, _framptonListFoldl) {
@@ -6827,7 +6783,7 @@ define('frampton-window/window', ['exports', 'module', 'frampton-signals/empty',
     };
   }
 });
-define('frampton', ['exports', 'module', 'frampton/namespace', 'frampton-utils', 'frampton-list', 'frampton-object', 'frampton-string', 'frampton-math', 'frampton-data', 'frampton-events', 'frampton-signals', 'frampton-mouse', 'frampton-keyboard', 'frampton-window', 'frampton-html', 'frampton-ui', 'frampton-style'], function (exports, module, _framptonNamespace, _framptonUtils, _framptonList, _framptonObject, _framptonString, _framptonMath, _framptonData, _framptonEvents, _framptonSignals, _framptonMouse, _framptonKeyboard, _framptonWindow, _framptonHtml, _framptonUi, _framptonStyle) {
+define('frampton', ['exports', 'module', 'frampton/namespace', 'frampton-utils', 'frampton-list', 'frampton-object', 'frampton-string', 'frampton-math', 'frampton-data', 'frampton-events', 'frampton-signals', 'frampton-mouse', 'frampton-keyboard', 'frampton-window', 'frampton-html', 'frampton-style'], function (exports, module, _framptonNamespace, _framptonUtils, _framptonList, _framptonObject, _framptonString, _framptonMath, _framptonData, _framptonEvents, _framptonSignals, _framptonMouse, _framptonKeyboard, _framptonWindow, _framptonHtml, _framptonStyle) {
   'use strict';
 
   function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
@@ -6847,7 +6803,7 @@ define('frampton/namespace', ['exports', 'module'], function (exports, module) {
    */
   'use strict';
 
-  Frampton.VERSION = '0.0.8';
+  Frampton.VERSION = '0.0.9';
 
   Frampton.TEST = 'test';
 

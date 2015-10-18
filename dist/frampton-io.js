@@ -13,7 +13,7 @@ var global = this;
   require = Frampton.__loader.require;
 
 }());
-define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 'frampton-io/complete', 'frampton-io/progress', 'frampton-io/error', 'frampton-io/start', 'frampton-io/http/send', 'frampton-io/http/get', 'frampton-io/http/get_newest', 'frampton-io/http/post', 'frampton-io/http/upload', 'frampton-io/http/url', 'frampton-io/http/query_pair', 'frampton-io/http/query_escape', 'frampton-io/http/uri_encode', 'frampton-io/http/uri_decode', 'frampton-io/file/read', 'frampton-io/file/data_url', 'frampton-io/file/binary_string', 'frampton-io/file/array_buffer', 'frampton-io/file/text'], function (exports, _framptonNamespace, _framptonIoResponse, _framptonIoComplete, _framptonIoProgress, _framptonIoError, _framptonIoStart, _framptonIoHttpSend, _framptonIoHttpGet, _framptonIoHttpGet_newest, _framptonIoHttpPost, _framptonIoHttpUpload, _framptonIoHttpUrl, _framptonIoHttpQuery_pair, _framptonIoHttpQuery_escape, _framptonIoHttpUri_encode, _framptonIoHttpUri_decode, _framptonIoFileRead, _framptonIoFileData_url, _framptonIoFileBinary_string, _framptonIoFileArray_buffer, _framptonIoFileText) {
+define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 'frampton-io/complete', 'frampton-io/progress', 'frampton-io/error', 'frampton-io/start', 'frampton-io/http/send', 'frampton-io/http/get', 'frampton-io/http/get_newest', 'frampton-io/http/post', 'frampton-io/http/post_json', 'frampton-io/http/upload', 'frampton-io/http/url', 'frampton-io/http/query_pair', 'frampton-io/http/query_escape', 'frampton-io/http/query_string', 'frampton-io/http/uri_encode', 'frampton-io/http/uri_decode', 'frampton-io/file/read', 'frampton-io/file/data_url', 'frampton-io/file/binary_string', 'frampton-io/file/array_buffer', 'frampton-io/file/text'], function (exports, _framptonNamespace, _framptonIoResponse, _framptonIoComplete, _framptonIoProgress, _framptonIoError, _framptonIoStart, _framptonIoHttpSend, _framptonIoHttpGet, _framptonIoHttpGet_newest, _framptonIoHttpPost, _framptonIoHttpPost_json, _framptonIoHttpUpload, _framptonIoHttpUrl, _framptonIoHttpQuery_pair, _framptonIoHttpQuery_escape, _framptonIoHttpQuery_string, _framptonIoHttpUri_encode, _framptonIoHttpUri_decode, _framptonIoFileRead, _framptonIoFileData_url, _framptonIoFileBinary_string, _framptonIoFileArray_buffer, _framptonIoFileText) {
   'use strict';
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -38,6 +38,8 @@ define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 
 
   var _post = _interopRequireDefault(_framptonIoHttpPost);
 
+  var _postJson = _interopRequireDefault(_framptonIoHttpPost_json);
+
   var _upload = _interopRequireDefault(_framptonIoHttpUpload);
 
   var _url = _interopRequireDefault(_framptonIoHttpUrl);
@@ -45,6 +47,8 @@ define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 
   var _queryPair = _interopRequireDefault(_framptonIoHttpQuery_pair);
 
   var _queryEscape = _interopRequireDefault(_framptonIoHttpQuery_escape);
+
+  var _queryString = _interopRequireDefault(_framptonIoHttpQuery_string);
 
   var _uriEncode = _interopRequireDefault(_framptonIoHttpUri_encode);
 
@@ -66,7 +70,7 @@ define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 
    * @memberof Frampton
    */
   _Frampton['default'].IO = {};
-  _Frampton['default'].IO.VERSION = '0.0.1';
+  _Frampton['default'].IO.VERSION = '0.0.2';
   _Frampton['default'].IO.Response = _Response['default'];
   _Frampton['default'].IO.complete = _complete['default'];
   _Frampton['default'].IO.progress = _progress['default'];
@@ -82,11 +86,13 @@ define('frampton-io', ['exports', 'frampton/namespace', 'frampton-io/response', 
   _Frampton['default'].IO.Http.send = _send['default'];
   _Frampton['default'].IO.Http.get = _get['default'];
   _Frampton['default'].IO.Http.post = _post['default'];
+  _Frampton['default'].IO.Http.postJson = _postJson['default'];
   _Frampton['default'].IO.Http.getNewest = _getNewest['default'];
   _Frampton['default'].IO.Http.upload = _upload['default'];
   _Frampton['default'].IO.Http.url = _url['default'];
   _Frampton['default'].IO.Http.queryPair = _queryPair['default'];
   _Frampton['default'].IO.Http.queryEscape = _queryEscape['default'];
+  _Frampton['default'].IO.Http.queryString = _queryString['default'];
   _Frampton['default'].IO.Http.uriEncode = _uriEncode['default'];
   _Frampton['default'].IO.Http.uriDecode = _uriDecode['default'];
 
@@ -207,11 +213,11 @@ define('frampton-io/file/read', ['exports', 'module', 'frampton-signals/event_st
       });
 
       reader.addEventListener('error', function (err) {
-        sink(_framptonSignalsEvent.errorEvent(_Response['default']('error', 0, err.message)));
+        sink(_framptonSignalsEvent.nextEvent(_Response['default']('error', 0, err.message)));
       });
 
       reader.addEventListener('abort', function (evt) {
-        sink(_framptonSignalsEvent.errorEvent(_Response['default']('abort', 0, null)));
+        sink(_framptonSignalsEvent.nextEvent(_Response['default']('abort', 0, null)));
       });
 
       switch (method) {
@@ -387,7 +393,8 @@ define('frampton-io/http/ajax_api', ['exports', 'module', 'frampton/namespace', 
         _this.listeners['load'].forEach(function (next) {
           next({
             target: {
-              response: 'test'
+              response: 'test',
+              status: 200
             },
             total: 500,
             loaded: 500
@@ -561,12 +568,49 @@ define('frampton-io/http/patch', ['exports', 'module', 'frampton-io/http/request
     return _send['default'](null, _Request['default'](url, 'PATCH', data || null));
   }
 });
-define('frampton-io/http/post', ['exports', 'module', 'frampton-io/http/request', 'frampton-io/http/send'], function (exports, module, _framptonIoHttpRequest, _framptonIoHttpSend) {
+define('frampton-io/http/post', ['exports', 'module', 'frampton-utils/is_object', 'frampton-io/http/request', 'frampton-io/http/send', 'frampton-io/http/query_string'], function (exports, module, _framptonUtilsIs_object, _framptonIoHttpRequest, _framptonIoHttpSend, _framptonIoHttpQuery_string) {
   'use strict';
 
   module.exports = post;
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _isObject = _interopRequireDefault(_framptonUtilsIs_object);
+
+  var _Request = _interopRequireDefault(_framptonIoHttpRequest);
+
+  var _send = _interopRequireDefault(_framptonIoHttpSend);
+
+  var _queryString = _interopRequireDefault(_framptonIoHttpQuery_string);
+
+  /**
+   * Perform an AJAX POST request and return an EventStream that reports the progress.
+   *
+   * @name post
+   * @method
+   * @memberof Frampton.IO.Http
+   * @param {String} url  Url to send request to
+   * @param {Object} data Data to send with request
+   * @returns {Frampton.Signals.EventStream} An EventStream of Response objects
+   */
+
+  function post(url, data) {
+
+    if (_isObject['default'](data)) {
+      data = _queryString['default'](data);
+    }
+
+    return _send['default'](null, _Request['default'](url, 'POST', data || null));
+  }
+});
+define('frampton-io/http/post_json', ['exports', 'module', 'frampton-utils/is_object', 'frampton-io/http/request', 'frampton-io/http/send'], function (exports, module, _framptonUtilsIs_object, _framptonIoHttpRequest, _framptonIoHttpSend) {
+  'use strict';
+
+  module.exports = post;
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _isObject = _interopRequireDefault(_framptonUtilsIs_object);
 
   var _Request = _interopRequireDefault(_framptonIoHttpRequest);
 
@@ -584,7 +628,14 @@ define('frampton-io/http/post', ['exports', 'module', 'frampton-io/http/request'
    */
 
   function post(url, data) {
-    return _send['default'](null, _Request['default'](url, 'POST', data || null));
+
+    if (_isObject['default'](data)) {
+      data = JSON.stringify(data);
+    }
+
+    return _send['default'](null, _Request['default'](url, 'POST', data || null, {
+      'Content-Type': 'application/json'
+    }));
   }
 });
 define('frampton-io/http/put', ['exports', 'module', 'frampton-io/http/request', 'frampton-io/http/send'], function (exports, module, _framptonIoHttpRequest, _framptonIoHttpSend) {
@@ -645,6 +696,59 @@ define('frampton-io/http/query_pair', ['exports', 'module', 'frampton-io/http/qu
     return _queryEscape['default'](pair[0]) + '=' + _queryEscape['default'](pair[1]);
   }
 });
+define('frampton-io/http/query_string', ['exports', 'module', 'frampton-utils/is_array', 'frampton-utils/is_object', 'frampton-utils/is_something', 'frampton-string/join', 'frampton-io/http/query_escape'], function (exports, module, _framptonUtilsIs_array, _framptonUtilsIs_object, _framptonUtilsIs_something, _framptonStringJoin, _framptonIoHttpQuery_escape) {
+  'use strict';
+
+  module.exports = query_string;
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _isArray = _interopRequireDefault(_framptonUtilsIs_array);
+
+  var _isObject = _interopRequireDefault(_framptonUtilsIs_object);
+
+  var _isSomething = _interopRequireDefault(_framptonUtilsIs_something);
+
+  var _join = _interopRequireDefault(_framptonStringJoin);
+
+  var _queryEscape = _interopRequireDefault(_framptonIoHttpQuery_escape);
+
+  function encode(prefix, obj, add) {
+
+    if (_isArray['default'](obj)) {
+
+      for (var i = 0; i < obj.length; i++) {
+
+        encode(prefix + '[]', obj[i], add);
+      }
+    } else if (_isObject['default'](obj)) {
+
+      for (var key in obj) {
+
+        encode(prefix + '[' + key + ']', obj[key], add);
+      }
+    } else {
+      add(prefix, obj);
+    }
+  }
+
+  function query_string(args) {
+
+    var params = [];
+
+    function add(key, value) {
+      if (_isSomething['default'](value)) {
+        params[params.length] = _queryEscape['default'](key) + '=' + _queryEscape['default'](value);
+      }
+    }
+
+    for (var key in args) {
+      encode(key, args[key], add);
+    }
+
+    return _join['default']('&', params);
+  }
+});
 define('frampton-io/http/query_unescape', ['exports', 'module', 'frampton-utils/memoize', 'frampton-io/http/uri_decode', 'frampton-string/join', 'frampton-string/split'], function (exports, module, _framptonUtilsMemoize, _framptonIoHttpUri_decode, _framptonStringJoin, _framptonStringSplit) {
   'use strict';
 
@@ -662,7 +766,15 @@ define('frampton-io/http/query_unescape', ['exports', 'module', 'frampton-utils/
     return _join['default'](' ', _split['default']('+', _uriDecode['default'](str)));
   });
 });
-define('frampton-io/http/request', ['exports', 'module'], function (exports, module) {
+define('frampton-io/http/request', ['exports', 'module', 'frampton-utils/extend'], function (exports, module, _framptonUtilsExtend) {
+  'use strict';
+
+  module.exports = Request;
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _extend = _interopRequireDefault(_framptonUtilsExtend);
+
   /**
    * @name Request
    * @method
@@ -673,16 +785,16 @@ define('frampton-io/http/request', ['exports', 'module'], function (exports, mod
    * @param {Object} [headers={}]   Headers to add to request
    * @returns {Object}
    */
-  'use strict';
-
-  module.exports = Request;
+  var defaultHeaders = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  };
 
   function Request(url, method, data, headers) {
     return {
       url: url,
       method: method || 'GET',
       body: data || null,
-      headers: headers || {}
+      headers: _extend['default']({}, defaultHeaders, headers || {})
     };
   }
 });
@@ -702,7 +814,7 @@ define('frampton-io/http/send', ['exports', 'module', 'frampton-utils/extend', '
   var _Response = _interopRequireDefault(_framptonIoResponse);
 
   var defaultSettings = {
-    timeout: 10 * 1000
+    timeout: 30 * 1000
   };
 
   /**
@@ -725,7 +837,7 @@ define('frampton-io/http/send', ['exports', 'module', 'frampton-utils/extend', '
 
       req.open(request.method, request.url, true);
 
-      req.addEventListener('loadStart', function (evt) {
+      req.addEventListener('loadstart', function (evt) {
         sink(_framptonSignalsEvent.nextEvent(_Response['default']('start', 0, null)));
       });
 
@@ -734,21 +846,29 @@ define('frampton-io/http/send', ['exports', 'module', 'frampton-utils/extend', '
       });
 
       req.addEventListener('error', function (err) {
-        sink(_framptonSignalsEvent.errorEvent(err.message || 'ajax error'));
+        sink(_framptonSignalsEvent.nextEvent(_Response['default']('error', 0, err.message)));
       });
 
       req.addEventListener('timeout', function (err) {
-        sink(_framptonSignalsEvent.errorEvent(err.message || 'timeout'));
+        sink(_framptonSignalsEvent.nextEvent(_Response['default']('error', 0, 'timeout')));
       });
 
       req.addEventListener('load', function (evt) {
+
         var response;
+        var target = evt.target;
+
         try {
-          response = JSON.parse(evt.target.response);
+          response = JSON.parse(target.response);
         } catch (e) {
-          response = evt.target.response;
+          response = target.response;
         }
-        sink(_framptonSignalsEvent.nextEvent(_Response['default']('complete', 1, response)));
+
+        if (target.status >= 200 && target.status < 300) {
+          sink(_framptonSignalsEvent.nextEvent(_Response['default']('complete', 1, response)));
+        } else {
+          sink(_framptonSignalsEvent.nextEvent(_Response['default']('error', 0, response)));
+        }
       });
 
       for (var key in request.headers) {
@@ -815,18 +935,14 @@ define('frampton-io/http/uri_encode', ['exports', 'module', 'frampton-utils/memo
     return encodeURIComponent(str);
   });
 });
-define('frampton-io/http/url', ['exports', 'module', 'frampton-utils/curry', 'frampton-string/join', 'frampton-object/as_list', 'frampton-io/http/query_pair'], function (exports, module, _framptonUtilsCurry, _framptonStringJoin, _framptonObjectAs_list, _framptonIoHttpQuery_pair) {
+define('frampton-io/http/url', ['exports', 'module', 'frampton-utils/curry', 'frampton-io/http/query_string'], function (exports, module, _framptonUtilsCurry, _framptonIoHttpQuery_string) {
   'use strict';
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
   var _curry = _interopRequireDefault(_framptonUtilsCurry);
 
-  var _join = _interopRequireDefault(_framptonStringJoin);
-
-  var _asList = _interopRequireDefault(_framptonObjectAs_list);
-
-  var _queryPair = _interopRequireDefault(_framptonIoHttpQuery_pair);
+  var _queryString = _interopRequireDefault(_framptonIoHttpQuery_string);
 
   /**
    * url_builder :: String -> Object -> String
@@ -840,7 +956,7 @@ define('frampton-io/http/url', ['exports', 'module', 'frampton-utils/curry', 'fr
    */
   module.exports = _curry['default'](function url_builder(domain, args) {
     if (!args) return domain;
-    return domain + '?' + _join['default']('&', _asList['default'](args).map(_queryPair['default']));
+    return domain + '?' + _queryString['default'](args);
   });
 });
 define('frampton-io/is_complete', ['exports', 'module'], function (exports, module) {

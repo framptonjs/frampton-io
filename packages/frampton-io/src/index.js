@@ -10,10 +10,12 @@ import send from 'frampton-io/http/send';
 import get from 'frampton-io/http/get';
 import getNewest from 'frampton-io/http/get_newest';
 import post from 'frampton-io/http/post';
+import postJson from 'frampton-io/http/post_json';
 import upload from 'frampton-io/http/upload';
 import url from 'frampton-io/http/url';
 import queryPair from 'frampton-io/http/query_pair';
 import queryEscape from 'frampton-io/http/query_escape';
+import queryString from 'frampton-io/http/query_string';
 import uriEncode from 'frampton-io/http/uri_encode';
 import uriDecode from 'frampton-io/http/uri_decode';
 
@@ -29,7 +31,7 @@ import text from 'frampton-io/file/text';
  * @memberof Frampton
  */
 Frampton.IO = {};
-Frampton.IO.VERSION           = '0.0.1';
+Frampton.IO.VERSION           = '0.0.2';
 Frampton.IO.Response          = Response;
 Frampton.IO.complete          = complete;
 Frampton.IO.progress          = progress;
@@ -45,11 +47,13 @@ Frampton.IO.Http = {};
 Frampton.IO.Http.send         = send;
 Frampton.IO.Http.get          = get;
 Frampton.IO.Http.post         = post;
+Frampton.IO.Http.postJson     = postJson;
 Frampton.IO.Http.getNewest    = getNewest;
 Frampton.IO.Http.upload       = upload;
 Frampton.IO.Http.url          = url;
 Frampton.IO.Http.queryPair    = queryPair;
 Frampton.IO.Http.queryEscape  = queryEscape;
+Frampton.IO.Http.queryString  = queryString;
 Frampton.IO.Http.uriEncode    = uriEncode;
 Frampton.IO.Http.uriDecode    = uriDecode;
 

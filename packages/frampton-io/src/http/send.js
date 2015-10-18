@@ -1,11 +1,11 @@
 import extend from 'frampton-utils/extend';
 import EventStream from 'frampton-signals/event_stream';
-import { nextEvent, errorEvent } from 'frampton-signals/event';
+import { nextEvent } from 'frampton-signals/event';
 import AjaxApi from 'frampton-io/http/ajax_api';
 import Response from 'frampton-io/response';
 
 var defaultSettings = {
-  timeout : (10 * 1000)
+  timeout : (30 * 1000)
 };
 
 /**
@@ -27,7 +27,7 @@ export default function send(settings, request) {
 
     req.open(request.method, request.url, true);
 
-    req.addEventListener('loadStart', function(evt) {
+    req.addEventListener('loadstart', function(evt) {
       sink(nextEvent(Response('start', 0, null)));
     });
 
@@ -36,21 +36,29 @@ export default function send(settings, request) {
     });
 
     req.addEventListener('error', function(err) {
-      sink(errorEvent(err.message || 'ajax error'));
+      sink(nextEvent(Response('error', 0, err.message)));
     });
 
     req.addEventListener('timeout', function(err) {
-      sink(errorEvent(err.message || 'timeout'));
+      sink(nextEvent(Response('error', 0, 'timeout')));
     });
 
     req.addEventListener('load', function(evt) {
+
       var response;
+      var target = evt.target;
+
       try {
-        response = JSON.parse(evt.target.response);
+        response = JSON.parse(target.response);
       } catch(e) {
-        response = evt.target.response;
+        response = target.response;
       }
-      sink(nextEvent(Response('complete', 1, response)));
+
+      if (target.status >= 200 && target.status < 300) {
+        sink(nextEvent(Response('complete', 1, response)));
+      } else {
+        sink(nextEvent(Response('error', 0, response)));
+      }
     });
 
     for (let key in request.headers) {

@@ -88,6 +88,11 @@ define("frampton-io/http/post.jshint", ["exports"], function (exports) {
 
   undefined;
 });
+define("frampton-io/http/post_json.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
 define("frampton-io/http/put.jshint", ["exports"], function (exports) {
   "use strict";
 
@@ -99,6 +104,11 @@ define("frampton-io/http/query_escape.jshint", ["exports"], function (exports) {
   undefined;
 });
 define("frampton-io/http/query_pair.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define("frampton-io/http/query_string.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -223,6 +233,31 @@ define("frampton-io/tests/http/get_test.jshint", ["exports"], function (exports)
 
   undefined;
 });
+define('frampton-io/tests/http/post_json_test', ['exports', 'frampton-io/http/post_json'], function (exports, _framptonIoHttpPost_json) {
+  'use strict';
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _postJson = _interopRequireDefault(_framptonIoHttpPost_json);
+
+  QUnit.module('Frampton.IO.Http.postJson');
+
+  QUnit.test('should return an EventStream of a response', function (assert) {
+    var done = assert.async();
+    var req = _postJson['default']('test', { test: 'test' });
+    req.next(function (val) {
+      if (val.status === 'complete') {
+        ok(true);
+        done();
+      }
+    });
+  });
+});
+define("frampton-io/tests/http/post_json_test.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
 define('frampton-io/tests/http/post_test', ['exports', 'frampton-io/http/post'], function (exports, _framptonIoHttpPost) {
   'use strict';
 
@@ -282,6 +317,40 @@ define('frampton-io/tests/http/query_pair_test', ['exports', 'frampton-io/http/q
   });
 });
 define("frampton-io/tests/http/query_pair_test.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define('frampton-io/tests/http/query_string_test', ['exports', 'frampton-io/http/query_string'], function (exports, _framptonIoHttpQuery_string) {
+  'use strict';
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _queryString = _interopRequireDefault(_framptonIoHttpQuery_string);
+
+  QUnit.module('Frampton.IO.Http.queryString');
+
+  QUnit.test('should create query string from object', function () {
+    var params = { one: 1, two: 2, three: 'three three' };
+    equal(_queryString['default'](params), 'one=1&two=2&three=three+three');
+  });
+
+  QUnit.test('should handle array values', function () {
+    var params = { one: 1, two: 2, three: [1, 2, 3] };
+    equal(_queryString['default'](params), 'one=1&two=2&three%5B%5D=1&three%5B%5D=2&three%5B%5D=3');
+  });
+
+  QUnit.test('should handle nested objects', function () {
+    var params = { one: 1, two: 2, three: { one: 1, two: 2, three: 3 } };
+    equal(_queryString['default'](params), 'one=1&two=2&three%5Bone%5D=1&three%5Btwo%5D=2&three%5Bthree%5D=3');
+  });
+
+  QUnit.test('should discard empty arrays', function () {
+    var params = { one: 1, two: 2, three: [] };
+    equal(_queryString['default'](params), 'one=1&two=2');
+  });
+});
+define("frampton-io/tests/http/query_string_test.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;

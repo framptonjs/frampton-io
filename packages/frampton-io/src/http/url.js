@@ -1,7 +1,5 @@
 import curry from 'frampton-utils/curry';
-import join from 'frampton-string/join';
-import asList from 'frampton-object/as_list';
-import queryPair from 'frampton-io/http/query_pair';
+import queryString from 'frampton-io/http/query_string';
 
 /**
  * url_builder :: String -> Object -> String
@@ -15,5 +13,5 @@ import queryPair from 'frampton-io/http/query_pair';
  */
 export default curry(function url_builder(domain, args) {
   if (!args) return domain;
-  return domain + '?' + join('&', asList(args).map(queryPair));
+  return domain + '?' + queryString(args);
 });

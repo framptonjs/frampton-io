@@ -1,3 +1,5 @@
+import extend from 'frampton-utils/extend';
+
 /**
  * @name Request
  * @method
@@ -8,11 +10,15 @@
  * @param {Object} [headers={}]   Headers to add to request
  * @returns {Object}
  */
+var defaultHeaders = {
+  'Content-Type' : 'application/x-www-form-urlencoded'
+};
+
 export default function Request(url, method, data, headers) {
   return {
     url     : url,
     method  : (method || 'GET'),
     body    : (data || null),
-    headers : (headers || {})
+    headers : extend({}, defaultHeaders, (headers || {}))
   };
 }

@@ -1,5 +1,5 @@
 import EventStream from 'frampton-signals/event_stream';
-import { errorEvent, nextEvent } from 'frampton-signals/event';
+import { nextEvent } from 'frampton-signals/event';
 import Response from 'frampton-io/response';
 import ReadApi from 'frampton-io/file/read_api';
 
@@ -23,11 +23,11 @@ export default function read_file(method, file) {
     });
 
     reader.addEventListener('error', (err) => {
-      sink(errorEvent(Response('error', 0, err.message)));
+      sink(nextEvent(Response('error', 0, err.message)));
     });
 
     reader.addEventListener('abort', (evt) => {
-      sink(errorEvent(Response('abort', 0, null)));
+      sink(nextEvent(Response('abort', 0, null)));
     });
 
     switch (method) {
