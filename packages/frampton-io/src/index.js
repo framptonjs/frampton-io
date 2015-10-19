@@ -1,6 +1,7 @@
 import Frampton from 'frampton/namespace';
 
 import Response from 'frampton-io/response';
+import success from 'frampton-io/success';
 import complete from 'frampton-io/complete';
 import progress from 'frampton-io/progress';
 import error from 'frampton-io/error';
@@ -33,6 +34,7 @@ import text from 'frampton-io/file/text';
 Frampton.IO = {};
 Frampton.IO.VERSION           = '0.0.2';
 Frampton.IO.Response          = Response;
+Frampton.IO.success           = success;
 Frampton.IO.complete          = complete;
 Frampton.IO.progress          = progress;
 Frampton.IO.error             = error;
