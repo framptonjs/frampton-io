@@ -4,7 +4,7 @@ QUnit.module('Frampton.IO.Http.get');
 
 QUnit.test('should return an EventStream of a response', function(assert) {
   var done = assert.async();
-  var req = get('test');
+  var req = get('get_test');
   req.next((val) => {
     if (val.status === 'complete') {
       ok(true);

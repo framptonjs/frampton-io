@@ -7,7 +7,9 @@ import progress from 'frampton-io/progress';
 import error from 'frampton-io/error';
 import start from 'frampton-io/start';
 
+import activity from 'frampton-io/http/activity';
 import send from 'frampton-io/http/send';
+import cached from 'frampton-io/http/cached';
 import get from 'frampton-io/http/get';
 import getNewest from 'frampton-io/http/get_newest';
 import post from 'frampton-io/http/post';
@@ -46,7 +48,9 @@ Frampton.IO.start             = start;
  * @namespace
  */
 Frampton.IO.Http = {};
+Frampton.IO.Http.activity     = activity;
 Frampton.IO.Http.send         = send;
+Frampton.IO.Http.cached       = cached;
 Frampton.IO.Http.get          = get;
 Frampton.IO.Http.post         = post;
 Frampton.IO.Http.postJson     = postJson;

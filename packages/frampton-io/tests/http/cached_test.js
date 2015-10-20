@@ -1,11 +1,10 @@
-import send from 'frampton-io/http/send';
-import Request from 'frampton-io/http/request';
+import cached from 'frampton-io/http/cached';
 
-QUnit.module('Frampton.IO.Http.send');
+QUnit.module('Frampton.IO.Http.cached');
 
 QUnit.test('should return an EventStream of a response', function(assert) {
   var done = assert.async();
-  var req = send(null, Request('send_test'));
+  var req = cached('cache_test');
   req.next((val) => {
     if (val.status === 'complete') {
       ok(true);

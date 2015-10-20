@@ -43,12 +43,12 @@ define("frampton-io/file/data_url.jshint", ["exports"], function (exports) {
 
   undefined;
 });
-define("frampton-io/file/read.jshint", ["exports"], function (exports) {
+define("frampton-io/file/read_api.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
 });
-define("frampton-io/file/read_api.jshint", ["exports"], function (exports) {
+define("frampton-io/file/read.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -63,12 +63,17 @@ define("frampton-io/http/ajax_api.jshint", ["exports"], function (exports) {
 
   undefined;
 });
-define("frampton-io/http/get.jshint", ["exports"], function (exports) {
+define("frampton-io/http/cached.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
 });
 define("frampton-io/http/get_newest.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define("frampton-io/http/get.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -83,12 +88,12 @@ define("frampton-io/http/patch.jshint", ["exports"], function (exports) {
 
   undefined;
 });
-define("frampton-io/http/post.jshint", ["exports"], function (exports) {
+define("frampton-io/http/post_json.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
 });
-define("frampton-io/http/post_json.jshint", ["exports"], function (exports) {
+define("frampton-io/http/post.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -128,12 +133,17 @@ define("frampton-io/http/send.jshint", ["exports"], function (exports) {
 
   undefined;
 });
-define("frampton-io/http/upload.jshint", ["exports"], function (exports) {
+define("frampton-io/http/storage_api.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
 });
 define("frampton-io/http/upload_many.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define("frampton-io/http/upload.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -168,6 +178,11 @@ define("frampton-io/is_start.jshint", ["exports"], function (exports) {
 
   undefined;
 });
+define("frampton-io/is_success.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
 define("frampton-io/progress.jshint", ["exports"], function (exports) {
   "use strict";
 
@@ -179,6 +194,11 @@ define("frampton-io/response.jshint", ["exports"], function (exports) {
   undefined;
 });
 define("frampton-io/start.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define("frampton-io/success.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
@@ -204,6 +224,31 @@ define('frampton-io/tests/file/read_test', ['exports', 'frampton-io/file/read'],
   });
 });
 define("frampton-io/tests/file/read_test.jshint", ["exports"], function (exports) {
+  "use strict";
+
+  undefined;
+});
+define('frampton-io/tests/http/cached_test', ['exports', 'frampton-io/http/cached'], function (exports, _framptonIoHttpCached) {
+  'use strict';
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+  var _cached = _interopRequireDefault(_framptonIoHttpCached);
+
+  QUnit.module('Frampton.IO.Http.cached');
+
+  QUnit.test('should return an EventStream of a response', function (assert) {
+    var done = assert.async();
+    var req = _cached['default']('test');
+    req.next(function (val) {
+      if (val.status === 'complete') {
+        ok(true);
+        done();
+      }
+    });
+  });
+});
+define("frampton-io/tests/http/cached_test.jshint", ["exports"], function (exports) {
   "use strict";
 
   undefined;
