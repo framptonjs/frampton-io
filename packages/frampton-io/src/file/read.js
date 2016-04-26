@@ -1,33 +1,36 @@
-import EventStream from 'frampton-signals/event_stream';
-import { nextEvent } from 'frampton-signals/event';
+import createTask from 'frampton-data/task/create';
 import Response from 'frampton-io/response';
 import ReadApi from 'frampton-io/file/read_api';
 
-// read_file :: Object -> File -> EventStream Response
+// read_file :: String -> File -> Task Response
 export default function read_file(method, file) {
 
-  return new EventStream(function seed_read_file(sink) {
+  return createTask((sinks) => {
 
-    var reader = ReadApi();
+    const reader = ReadApi();
 
-    reader.addEventListener('loadstart', (evt) => {
-      sink(nextEvent(Response('start', 0, null)));
-    });
+    if (sinks.start) {
+      reader.addEventListener('loadstart', (evt) => {
+        sinks.start(Response('start', 0, null));
+      });
+    }
 
-    reader.addEventListener('progress', (evt) => {
-      sink(nextEvent(Response('progress', (evt.loaded / evt.total), null)));
-    });
+    if (sinks.progress) {
+      reader.addEventListener('progress', (evt) => {
+        sinks.progress(Response('progress', (evt.loaded / evt.total), null));
+      });
+    }
 
     reader.addEventListener('load', (evt) => {
-      sink(nextEvent(Response('complete', 1, evt.target.result)));
+      sinks.resolve(Response('success', 1, evt.target.result));
     });
 
     reader.addEventListener('error', (err) => {
-      sink(nextEvent(Response('error', 0, err.message)));
+      sinks.reject(Response('error', 0, err.message));
     });
 
     reader.addEventListener('abort', (evt) => {
-      sink(nextEvent(Response('abort', 0, null)));
+      sinks.reject(Response('error', 0, 'abort'));
     });
 
     switch (method) {

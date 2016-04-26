@@ -2,7 +2,7 @@ import isArray from 'frampton-utils/is_array';
 import isObject from 'frampton-utils/is_object';
 import isSomething from 'frampton-utils/is_something';
 import join from 'frampton-string/join';
-import queryEscape from 'frampton-io/http/query_escape';
+import queryEscape from 'frampton-io/http/utils/query_escape';
 
 function encode(prefix, obj, add) {
 

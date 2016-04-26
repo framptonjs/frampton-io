@@ -74,7 +74,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line76">line 76</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -98,6 +98,13 @@
 
      
 
+    
+        <h3 class="subsection-title">Namespaces</h3>
+
+        <dl>
+            <dt><a href="Frampton.IO.Http.Utils.html">Utils</a></dt>
+            <dd></dd>
+        </dl>
     
 
     
@@ -161,7 +168,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line419">line 419</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line422">line 422</a>
     </li></ul></dd>
     
 
@@ -214,14 +221,186 @@
 
     
 
-    <h4 class="name" id=".get"><span class="type-signature">(static) </span>get<span class="signature">(url, data<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Frampton.Signals.EventStream}</span></h4>
+    <h4 class="name" id=".delete"><span class="type-signature">(static) </span>delete<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
 
     
 
 
 
 <div class="description">
-    Perform an AJAX GET request and return an EventStream that reports the progress.
+    Returns a task that will perform an HTTP DELETE
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Url to send request to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Data to send with request</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line459">line 459</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Frampton.Data.Task</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".get"><span class="type-signature">(static) </span>get<span class="signature">(url, data<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Returns a task that will perform an HTTP GET
 </div>
 
 
@@ -357,7 +536,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line449">line 449</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line489">line 489</a>
     </li></ul></dd>
     
 
@@ -384,7 +563,7 @@
 
         
 <div class="param-desc">
-    An EventStream of Response objects
+    A Task of a Response
 </div>
 
 
@@ -395,7 +574,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Frampton.Signals.EventStream</span>
+<span class="param-type">Frampton.Data.Task</span>
 
 
     </dd>
@@ -410,14 +589,14 @@
 
     
 
-    <h4 class="name" id=".patch"><span class="type-signature">(static) </span>patch<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Signals.EventStream}</span></h4>
+    <h4 class="name" id=".patch"><span class="type-signature">(static) </span>patch<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
 
     
 
 
 
 <div class="description">
-    Perform an AJAX PATCH request and return an EventStream that reports the progress.
+    Returns a task that will perform an HTTP PATCH
 </div>
 
 
@@ -533,7 +712,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line549">line 549</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line517">line 517</a>
     </li></ul></dd>
     
 
@@ -559,10 +738,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    An EventStream of Response objects
-</div>
-
 
 
 <dl>
@@ -571,7 +746,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Frampton.Signals.EventStream</span>
+<span class="param-type">Frampton.Data.Task</span>
 
 
     </dd>
@@ -586,7 +761,179 @@
 
     
 
-    <h4 class="name" id=".post"><span class="type-signature">(static) </span>post<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Signals.EventStream}</span></h4>
+    <h4 class="name" id=".post"><span class="type-signature">(static) </span>post<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Returns a task that will perform an HTTP POST
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Url to send request to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Data to send with request</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line611">line 611</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Frampton.Data.Task</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".postJson"><span class="type-signature">(static) </span>postJson<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
 
     
 
@@ -709,7 +1056,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line575">line 575</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line543">line 543</a>
     </li></ul></dd>
     
 
@@ -735,10 +1082,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    An EventStream of Response objects
-</div>
-
 
 
 <dl>
@@ -747,7 +1090,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Frampton.Signals.EventStream</span>
+<span class="param-type">Frampton.Data.Task</span>
 
 
     </dd>
@@ -762,14 +1105,14 @@
 
     
 
-    <h4 class="name" id=".put"><span class="type-signature">(static) </span>put<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Signals.EventStream}</span></h4>
+    <h4 class="name" id=".postString"><span class="type-signature">(static) </span>postString<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
 
     
 
 
 
 <div class="description">
-    Perform an AJAX PUT request and return an EventStream that reports the progress.
+    Perform an AJAX POST request and return an EventStream that reports the progress.
 </div>
 
 
@@ -885,7 +1228,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line601">line 601</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line577">line 577</a>
     </li></ul></dd>
     
 
@@ -911,10 +1254,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    An EventStream of Response objects
-</div>
-
 
 
 <dl>
@@ -923,7 +1262,179 @@
     </dt>
     <dd>
         
-<span class="param-type">Frampton.Signals.EventStream</span>
+<span class="param-type">Frampton.Data.Task</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".put"><span class="type-signature">(static) </span>put<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {Frampton.Data.Task}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Returns a task that will perform an HTTP PUT
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Url to send request to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Data to send with request</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line639">line 639</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Frampton.Data.Task</span>
 
 
     </dd>
@@ -1167,7 +1678,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line666">line 666</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line655">line 655</a>
     </li></ul></dd>
     
 
@@ -1216,7 +1727,7 @@
 
     
 
-    <h4 class="name" id=".send"><span class="type-signature">(static) </span>send<span class="signature">(settings, request)</span><span class="type-signature"> &rarr; {Frampton.Signals.EventStream}</span></h4>
+    <h4 class="name" id=".send"><span class="type-signature">(static) </span>send<span class="signature">(settings, request)</span><span class="type-signature"> &rarr; {Frampton.Task}</span></h4>
 
     
 
@@ -1339,7 +1850,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line708">line 708</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line719">line 719</a>
     </li></ul></dd>
     
 
@@ -1377,7 +1888,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Frampton.Signals.EventStream</span>
+<span class="param-type">Frampton.Task</span>
 
 
     </dd>
@@ -1515,7 +2026,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line831">line 831</a>
+        <a href="frampton-io.js.html">frampton-io.js</a>, <a href="frampton-io.js.html#line963">line 963</a>
     </li></ul></dd>
     
 
@@ -1575,13 +2086,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Frampton.IO.html">IO</a></li><li><a href="Frampton.IO.File.html">File</a></li><li><a href="Frampton.IO.Http.html">Http</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Frampton.IO.html">IO</a></li><li><a href="Frampton.IO.File.html">File</a></li><li><a href="Frampton.IO.Http.html">Http</a></li><li><a href="Frampton.IO.Http.Utils.html">Utils</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Mon Sep 28 2015 09:45:29 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Mon Apr 25 2016 21:21:24 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

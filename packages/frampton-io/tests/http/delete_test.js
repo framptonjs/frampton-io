@@ -1,12 +1,10 @@
-import send from 'frampton-io/http/send';
-import Request from 'frampton-io/http/request';
-import defaultSettings from 'frampton-io/http/default_settings';
+import deleteReq from 'frampton-io/http/delete';
 
-QUnit.module('Frampton.IO.Http.send');
+QUnit.module('Frampton.IO.Http.delete');
 
 QUnit.test('Should return an task of a response', function(assert) {
   const done = assert.async();
-  const req = send(defaultSettings, Request('send_test'));
+  const req = deleteReq('get_test');
   req.run({
     reject : (err) => {
       ok(false, 'returned error');

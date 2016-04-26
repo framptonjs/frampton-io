@@ -1,23 +1,17 @@
-import isObject from 'frampton-utils/is_object';
 import Request from 'frampton-io/http/request';
 import send from 'frampton-io/http/send';
-import queryString from 'frampton-io/http/query_string';
+import defaultSettings from 'frampton-io/http/default_settings';
 
 /**
- * Perform an AJAX POST request and return an EventStream that reports the progress.
+ * Returns a task that will perform an HTTP POST
  *
  * @name post
  * @method
  * @memberof Frampton.IO.Http
  * @param {String} url  Url to send request to
  * @param {Object} data Data to send with request
- * @returns {Frampton.Signals.EventStream} An EventStream of Response objects
+ * @returns {Frampton.Data.Task}
  */
-export default function post(url, data) {
-
-  if (isObject(data)) {
-    data = queryString(data);
-  }
-
-  return send(null, Request(url, 'POST', (data || null)));
+export default function post_request(url, data, headers) {
+  return send(defaultSettings, Request(url, 'POST', (data || null), (headers || null)));
 }

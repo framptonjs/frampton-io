@@ -2,6 +2,8 @@ import Frampton from 'frampton/namespace';
 import apply from 'frampton-utils/apply';
 
 function MockAjax() {
+  this.method = 'GET';
+  this.url = '';
   this.listeners = {};
   this.headers = {};
   this.requestTime = ((Math.random() * 1000) + 300);
@@ -10,7 +12,10 @@ function MockAjax() {
 
 MockAjax.prototype.timeout = 10000;
 
-MockAjax.prototype.open = function(method, url) {};
+MockAjax.prototype.open = function(method, url) {
+  this.method = method;
+  this.url = url;
+};
 
 MockAjax.prototype.send = function() {
 
@@ -37,7 +42,7 @@ MockAjax.prototype.send = function() {
       this.listeners['load'].forEach((next) => {
         next({
           target: {
-            response: 'test',
+            response: (Frampton.mock(this.url) || 'test'),
             status: 200
           },
           total: 500,

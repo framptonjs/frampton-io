@@ -2,13 +2,18 @@ import get from 'frampton-io/http/get';
 
 QUnit.module('Frampton.IO.Http.get');
 
-QUnit.test('should return an EventStream of a response', function(assert) {
-  var done = assert.async();
-  var req = get('get_test');
-  req.next((val) => {
-    if (val.status === 'complete') {
-      ok(true);
-      done();
+QUnit.test('Should return an task of a response', function(assert) {
+  const done = assert.async();
+  const req = get('get_test');
+  req.run({
+    reject : (err) => {
+      ok(false, 'returned error');
+    },
+    resolve : (val) => {
+      if (val.status === 'success') {
+        ok(true);
+        done();
+      }
     }
   });
 });

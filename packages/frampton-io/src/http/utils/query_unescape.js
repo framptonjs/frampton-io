@@ -1,5 +1,5 @@
 import memoize from 'frampton-utils/memoize';
-import uriDecode from 'frampton-io/http/uri_decode';
+import uriDecode from 'frampton-io/http/utils/uri_decode';
 import join from 'frampton-string/join';
 import split from 'frampton-string/split';
 

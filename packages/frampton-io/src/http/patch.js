@@ -1,16 +1,17 @@
 import Request from 'frampton-io/http/request';
 import send from 'frampton-io/http/send';
+import defaultSettings from 'frampton-io/http/default_settings';
 
 /**
- * Perform an AJAX PATCH request and return an EventStream that reports the progress.
+ * Returns a task that will perform an HTTP PATCH
  *
  * @name patch
  * @method
  * @memberof Frampton.IO.Http
  * @param {String} url  Url to send request to
  * @param {Object} data Data to send with request
- * @returns {Frampton.Signals.EventStream} An EventStream of Response objects
+ * @returns {Frampton.Data.Task}
  */
-export default function patch(url, data) {
-  return send(null, Request(url, 'PATCH', (data || null)));
+export default function patch_request(url, data) {
+  return send(defaultSettings, Request(url, 'PATCH', (data || null)));
 }

@@ -1,5 +1,5 @@
 import curry from 'frampton-utils/curry';
-import queryString from 'frampton-io/http/query_string';
+import queryString from 'frampton-io/http/utils/query_string';
 
 /**
  * url_builder :: String -> Object -> String

@@ -3,15 +3,15 @@ import send from 'frampton-io/http/send';
 import defaultSettings from 'frampton-io/http/default_settings';
 
 /**
- * Returns a task that will perform an HTTP PUT
+ * Returns a task that will perform an HTTP DELETE
  *
- * @name put
+ * @name delete
  * @method
  * @memberof Frampton.IO.Http
  * @param {String} url  Url to send request to
  * @param {Object} data Data to send with request
  * @returns {Frampton.Data.Task}
  */
-export default function put_request(url, data) {
-  return send(defaultSettings, Request(url, 'PUT', (data || null)));
+export default function delete_request(url, data) {
+  return send(defaultSettings, Request(url, 'DELETE', (data || null)));
 }
