@@ -9,11 +9,11 @@ QUnit.test('Should return an task of a response', function(assert) {
   const req = send(defaultSettings, Request('send_test'));
   req.run({
     reject : (err) => {
-      ok(false, 'returned error');
+      assert.ok(false, 'returned error');
     },
     resolve : (val) => {
       if (val.status === 'success') {
-        ok(true);
+        assert.ok(true);
         done();
       }
     }

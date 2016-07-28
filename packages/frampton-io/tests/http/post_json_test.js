@@ -7,12 +7,12 @@ QUnit.test('should return an Task of a response', function(assert) {
   const req = postJson('post_json_test', { test : 'test' });
   req.run({
     reject : (err) => {
-      ok(false);
+      assert.ok(false);
       done();
     },
     resolve : (val) => {
       if (val.status === 'success') {
-        ok(true);
+        assert.ok(true);
         done();
       }
     }
