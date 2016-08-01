@@ -1,6 +1,6 @@
 import error from 'frampton-utils/error';
 import createTask from 'frampton-data/task/create';
-import AjaxApi from 'frampton-io/http/ajax_api';
+import AjaxApi from 'frampton-io/http/utils/ajax_api';
 import Response from 'frampton-io/response';
 
 /**

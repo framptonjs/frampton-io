@@ -1,7 +1,7 @@
 import Request from 'frampton-io/http/request';
 import urlBuilder from 'frampton-io/http/utils/url';
 import send from 'frampton-io/http/send';
-import defaultSettings from 'frampton-io/http/default_settings';
+import defaultSettings from 'frampton-io/http/utils/default_settings';
 
 /**
  * Returns a task that will perform an HTTP GET
