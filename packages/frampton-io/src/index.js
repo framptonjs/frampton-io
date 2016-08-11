@@ -28,7 +28,7 @@ import text from 'frampton-io/file/text';
  * @memberof Frampton
  */
 Frampton.IO          = {};
-Frampton.IO.VERSION  = '0.1.2';
+Frampton.IO.VERSION  = '{-- VERSION_PLACEHOLDER --}';
 Frampton.IO.Response = Response;
 
 /**
