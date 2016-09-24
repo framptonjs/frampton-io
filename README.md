@@ -1,5 +1,9 @@
 # Frampton-IO
 
+[![Build Status](https://semaphoreci.com/api/v1/beatniklarry/frampton-io/branches/master/badge.svg)](https://semaphoreci.com/beatniklarry/frampton-io)
+
+A library providing lazy and monadic interfaces for performing network request and file reads.
+
 
 ## Install
 ```
@@ -45,7 +49,7 @@ request
   });
 ```
 
-We can also chain requests.
+We can also chain/compose requests.
 
 ```
 const httpGet = Frampton.IO.Http.get;
