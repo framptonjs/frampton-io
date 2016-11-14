@@ -4,7 +4,7 @@ import defaultSettings from 'frampton-io/http/utils/default_settings';
 
 QUnit.module('Frampton.IO.Http.send');
 
-QUnit.test('Should return an task of a response', function(assert) {
+QUnit.test('returns a task of a response', function(assert) {
   const done = assert.async();
   const req = send(defaultSettings, Request('send_test'));
   req.run({

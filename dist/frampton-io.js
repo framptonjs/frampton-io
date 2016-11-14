@@ -13,7 +13,7 @@ var global = this;
   require = Frampton.__loader.require;
 
 }());
-define('frampton-io', ['frampton/namespace', 'frampton-io/response', 'frampton-io/http/request', 'frampton-io/http/send', 'frampton-io/http/get', 'frampton-io/http/post', 'frampton-io/http/post_json', 'frampton-io/http/post_string', 'frampton-io/http/upload', 'frampton-io/http/utils/url', 'frampton-io/http/utils/query_pair', 'frampton-io/http/utils/query_escape', 'frampton-io/http/utils/query_string', 'frampton-io/http/utils/uri_encode', 'frampton-io/http/utils/uri_decode', 'frampton-io/file/read', 'frampton-io/file/data_url', 'frampton-io/file/binary_string', 'frampton-io/file/array_buffer', 'frampton-io/file/text'], function (_namespace, _response, _request, _send, _get, _post, _post_json, _post_string, _upload, _url, _query_pair, _query_escape, _query_string, _uri_encode, _uri_decode, _read, _data_url, _binary_string, _array_buffer, _text) {
+define('frampton-io', ['frampton/namespace', 'frampton-io/response', 'frampton-io/http/request', 'frampton-io/http/send', 'frampton-io/http/delete', 'frampton-io/http/put', 'frampton-io/http/patch', 'frampton-io/http/get', 'frampton-io/http/post', 'frampton-io/http/post_json', 'frampton-io/http/post_string', 'frampton-io/http/upload', 'frampton-io/http/utils/url', 'frampton-io/http/utils/query_pair', 'frampton-io/http/utils/query_escape', 'frampton-io/http/utils/query_string', 'frampton-io/http/utils/uri_encode', 'frampton-io/http/utils/uri_decode', 'frampton-io/file/read', 'frampton-io/file/data_url', 'frampton-io/file/binary_string', 'frampton-io/file/array_buffer', 'frampton-io/file/text'], function (_namespace, _response, _request, _send, _delete, _put, _patch, _get, _post, _post_json, _post_string, _upload, _url, _query_pair, _query_escape, _query_string, _uri_encode, _uri_decode, _read, _data_url, _binary_string, _array_buffer, _text) {
   'use strict';
 
   var _namespace2 = _interopRequireDefault(_namespace);
@@ -23,6 +23,12 @@ define('frampton-io', ['frampton/namespace', 'frampton-io/response', 'frampton-i
   var _request2 = _interopRequireDefault(_request);
 
   var _send2 = _interopRequireDefault(_send);
+
+  var _delete2 = _interopRequireDefault(_delete);
+
+  var _put2 = _interopRequireDefault(_put);
+
+  var _patch2 = _interopRequireDefault(_patch);
 
   var _get2 = _interopRequireDefault(_get);
 
@@ -83,6 +89,9 @@ define('frampton-io', ['frampton/namespace', 'frampton-io/response', 'frampton-i
   _namespace2.default.IO.Http.post = _post2.default;
   _namespace2.default.IO.Http.postJson = _post_json2.default;
   _namespace2.default.IO.Http.postString = _post_string2.default;
+  _namespace2.default.IO.Http.delete = _delete2.default;
+  _namespace2.default.IO.Http.patch = _patch2.default;
+  _namespace2.default.IO.Http.put = _put2.default;
   _namespace2.default.IO.Http.upload = _upload2.default;
 
   /**
@@ -813,6 +822,11 @@ define('frampton-io/http/utils/ajax_api', ['exports', 'frampton/namespace', 'fra
 
     setTimeout(function () {
 
+      var methodUrl = _this.method + ':' + _this.url;
+      var methodResponse = _namespace2.default.mock(methodUrl);
+      var baseResponse = _namespace2.default.mock(_this.url);
+      var data = methodResponse || baseResponse || 'test';
+
       if (_this.progressInterval) {
         clearInterval(_this.progressInterval);
         _this.progressInterval = null;
@@ -822,7 +836,7 @@ define('frampton-io/http/utils/ajax_api', ['exports', 'frampton/namespace', 'fra
         _this.listeners['load'].forEach(function (next) {
           next({
             target: {
-              response: _namespace2.default.mock(_this.url) || 'test',
+              response: data,
               status: 200
             },
             total: 500,

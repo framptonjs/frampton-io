@@ -2,7 +2,7 @@ import upload from 'frampton-io/http/upload';
 
 QUnit.module('Frampton.IO.Http.upload');
 
-QUnit.test('Should return an task of a response', function(assert) {
+QUnit.test('returns a task of a response', function(assert) {
   const done = assert.async();
   const req = upload('upload_test', 'test data');
   req.run({

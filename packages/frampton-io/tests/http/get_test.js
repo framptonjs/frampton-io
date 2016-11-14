@@ -2,7 +2,7 @@ import get from 'frampton-io/http/get';
 
 QUnit.module('Frampton.IO.Http.get');
 
-QUnit.test('Should return an task of a response', function(assert) {
+QUnit.test('returns a task of a response', function(assert) {
   const done = assert.async();
   const req = get('get_test');
   req.run({

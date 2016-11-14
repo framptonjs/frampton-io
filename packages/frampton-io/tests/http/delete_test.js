@@ -2,7 +2,7 @@ import deleteReq from 'frampton-io/http/delete';
 
 QUnit.module('Frampton.IO.Http.delete');
 
-QUnit.test('Should return an task of a response', function(assert) {
+QUnit.test('returns a task of a response', function(assert) {
   const done = assert.async();
   const req = deleteReq('get_test');
   req.run({

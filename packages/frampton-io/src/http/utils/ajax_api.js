@@ -33,6 +33,11 @@ MockAjax.prototype.send = function() {
 
   setTimeout(() => {
 
+    const methodUrl = `${this.method}:${this.url}`;
+    const methodResponse = Frampton.mock(methodUrl);
+    const baseResponse = Frampton.mock(this.url);
+    const data = (methodResponse || baseResponse || 'test');
+
     if (this.progressInterval) {
       clearInterval(this.progressInterval);
       this.progressInterval = null;
@@ -42,7 +47,7 @@ MockAjax.prototype.send = function() {
       this.listeners['load'].forEach((next) => {
         next({
           target: {
-            response: (Frampton.mock(this.url) || 'test'),
+            response: data,
             status: 200
           },
           total: 500,

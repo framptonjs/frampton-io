@@ -4,6 +4,9 @@ import Response from 'frampton-io/response';
 
 import Request from 'frampton-io/http/request';
 import send from 'frampton-io/http/send';
+import deleteRequest from 'frampton-io/http/delete';
+import put from 'frampton-io/http/put';
+import patch from 'frampton-io/http/patch';
 import get from 'frampton-io/http/get';
 import post from 'frampton-io/http/post';
 import postJson from 'frampton-io/http/post_json';
@@ -37,13 +40,16 @@ Frampton.IO.Response = Response;
  * @namespace
  */
 Frampton.IO.Http = {};
-Frampton.IO.Http.Request           = Request;
-Frampton.IO.Http.send              = send;
-Frampton.IO.Http.get               = get;
-Frampton.IO.Http.post              = post;
-Frampton.IO.Http.postJson          = postJson;
-Frampton.IO.Http.postString        = postString;
-Frampton.IO.Http.upload            = upload;
+Frampton.IO.Http.Request    = Request;
+Frampton.IO.Http.send       = send;
+Frampton.IO.Http.get        = get;
+Frampton.IO.Http.post       = post;
+Frampton.IO.Http.postJson   = postJson;
+Frampton.IO.Http.postString = postString;
+Frampton.IO.Http.delete     = deleteRequest;
+Frampton.IO.Http.patch      = patch;
+Frampton.IO.Http.put        = put;
+Frampton.IO.Http.upload     = upload;
 
 /**
  * @name Utils
