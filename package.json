@@ -1,6 +1,6 @@
 {
   "name": "frampton-io",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A module for managing browser io with frampton.js",
   "scripts": {
     "test": "frampton test",

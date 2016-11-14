@@ -74,7 +74,7 @@ define('frampton-io', ['frampton/namespace', 'frampton-io/response', 'frampton-i
    * @memberof Frampton
    */
   _namespace2.default.IO = {};
-  _namespace2.default.IO.VERSION = '0.1.2';
+  _namespace2.default.IO.VERSION = '0.1.3';
   _namespace2.default.IO.Response = _response2.default;
 
   /**
