@@ -10,10 +10,10 @@
  */
 export default function Request(url, method, data, headers) {
   return {
-    url       : url,
-    timestamp : Date.now(),
-    method    : (method || 'GET'),
-    body      : (data || null),
-    headers   : (headers || {})
+    url: url,
+    timestamp: Date.now(),
+    method: (method || 'GET'),
+    body: (data || null),
+    headers: (headers || {})
   };
 }

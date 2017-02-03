@@ -3,7 +3,7 @@ import post from 'frampton-io/http/post';
 
 export default curry(function upload(url, files) {
   const formData = new FormData();
-  for (let i=0;i<files.length;i++) {
+  for (let i=0; i<files.length; i++) {
     formData.append('file-' + i, files[i]);
   }
   return post(url, formData);
