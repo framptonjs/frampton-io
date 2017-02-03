@@ -1,6 +1,6 @@
 {
   "name": "frampton-io",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./dist/frampton-io.js",
   "description": "A module for managing browser io with frampton.js",
   "scripts": {
